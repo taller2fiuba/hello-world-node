@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-edjus-demo",
+  "version": "1.0.0",
+  "description": "nodejs image demo",
+  "author": "Edson Justo",
+  "license": "MIT",
+  "main": "app.js",
+  "scripts": {
+    "test" : "mocha --exit",
+    "start": "node app.js"
+  },
+  "keywords": [
+    "nodejs",
+    "bootstrap",
+    "express"
+  ],
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "express": "^4.16.4",
+    "mocha": "^7.1.1"
+  }
+}
