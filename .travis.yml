@@ -13,7 +13,7 @@ install:
     - cd behave-test && sudo pip install -r requirements.txt
 script:
     - npm test # unit tests
-    - docker-compose up # levantar la aplicacion
+    - docker-compose start # levantar la aplicacion
     - cd behave-test && behave # test de integracion
 after_success:
     - docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
