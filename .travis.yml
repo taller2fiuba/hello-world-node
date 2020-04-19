@@ -1,7 +1,20 @@
+sudo: required
 language: node_js
 node_js:
     - "13"
-before_script:
+services:
+    - docker
+before_install:
+    # login to docker registries (dockerhub)
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+install:
+    # install deps
     - npm install
 script:
     - npm test
+    - docker build -t app
+after_success:
+    - docker tag app $DOCKER_USER/app:$TRAVIS_BUILD_NUMBER
+    - docker push $DOCKER_USER/app:$TRAVIS_BUILD_NUMBER
+    - docker tag app $DOCKER_USER/app:latest
+    - docker push $DOCKER_USER/app:latest
