@@ -13,7 +13,7 @@ script:
     - npm test
     - docker build -t app .
 after_success:
-    - docker tag app $DOCKER_USER/app:$TRAVIS_BUILD_NUMBER
-    - docker push $DOCKER_USER/app:$TRAVIS_BUILD_NUMBER
-    - docker tag app $DOCKER_USER/app:latest
-    - docker push $DOCKER_USER/app:latest
+    - docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
+    - docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
+    - docker tag app $DOCKER_USERNAME/app:latest
+    - docker push $DOCKER_USERNAME/app:latest
