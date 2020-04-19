@@ -6,12 +6,15 @@ services:
 before_install:
     # login to docker registries (dockerhub)
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - git clone https://github.com/FrancoLiberali/behave-test.git
 install:
     # install deps
     - npm install
+    - cd behave-test && pip install -r requirements.txt
 script:
-    - npm test
-    - docker build -t app .
+    - npm test # unit tests
+    - docker-compose up # levantar la aplicacion
+    - cd behave-test && behave # test de integracion
 after_success:
     - docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
     - docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
