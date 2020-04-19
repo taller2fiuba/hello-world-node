@@ -13,10 +13,14 @@ install:
     - npm install
     - echo "$(pwd)"
     - cd behave-test && sudo pip install -r requirements.txt
+before_script:
+    - docker-compose up -d --build # levantar la aplicacion
 script:
     - npm test # unit tests
-    - docker-compose start # levantar la aplicacion
+    - echo "$(pwd)"
     - cd behave-test && behave # test de integracion
+after_script:
+    - docker-compose down
 after_success:
     - docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
     - docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
