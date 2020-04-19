@@ -8,8 +8,9 @@ router.use(function (req,res,next) {
     console.log('/' + req.method);
     next();
   });
-  
+
 router.get('/', function(req,res){
+    // comentario
     res.json({title:'Hello world'});
 });
 
