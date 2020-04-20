@@ -9,7 +9,6 @@ notifications:
         recipients:
             - franco.liberali@gmail.com
 before_install:
-    - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then echo "hola"; fi'
     # login to docker registries (dockerhub)
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - git clone https://github.com/FrancoLiberali/behave-test.git
