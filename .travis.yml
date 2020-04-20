@@ -4,6 +4,7 @@ node_js:
 services:
     - docker
 env:
+    - ALGO=true
     - RAMA_MASTER=(TRAVIS_BRANCH = 'master')
     - CORRER_TESTS_DE_INTEGRACION=(RAMA_MASTER || TRAVIS_PULL_REQUEST = true)
 before_install:
@@ -19,6 +20,7 @@ before_script:
     - 'if [ "$CORRER_TESTS_DE_INTEGRACION" = "true" ]; then docker-compose up -d --build; fi' # levantar la aplicacion
 script:
     - npm test # unit tests
+    - echo "$(ALGO)"
     - echo "$(CORRER_TESTS_DE_INTEGRACION)"
     - 'if [ "$CORRER_TESTS_DE_INTEGRACION" = "true" ]; then behave; fi'  # test de integracion
 after_script:
