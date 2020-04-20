@@ -8,6 +8,7 @@ before_install:
           export CORRER_TESTS_DE_INTEGRACION=true;
       fi'
     - echo "$(CORRER_TESTS_DE_INTEGRACION)"
+    # asd
     # login to docker registries (dockerhub)
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - git clone https://github.com/FrancoLiberali/behave-test.git
