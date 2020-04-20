@@ -4,11 +4,7 @@ node_js:
 services:
     - docker
 before_install:
-    - 'if [ "$TRAVIS_BRANCH" = 'master' || "$TRAVIS_PULL_REQUEST" ]; then
-          export CORRER_TESTS_DE_INTEGRACION=true;
-      fi'
-    - echo "$(CORRER_TESTS_DE_INTEGRACION)"
-    # asd
+    - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then echo "hola"; fi'
     # login to docker registries (dockerhub)
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - git clone https://github.com/FrancoLiberali/behave-test.git
@@ -18,15 +14,16 @@ install:
     - npm install
     - cd behave-test && sudo pip install -r requirements.txt
 before_script:
-    - 'if [ $CORRER_TESTS_DE_INTEGRACION ]; then docker-compose up -d --build; fi' # levantar la aplicacion
+    - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then docker-compose up -d --build; fi' # levantar la aplicacion
 script:
     - npm test # unit tests
-    - echo "$(CORRER_TESTS_DE_INTEGRACION)"
-    - 'if [ $CORRER_TESTS_DE_INTEGRACION ]; then behave; fi'  # test de integracion
+    - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then behave; fi'  # test de integracion
 after_script:
-    - 'if [ $CORRER_TESTS_DE_INTEGRACION ]; then docker-compose down; fi'
+    - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then docker-compose down; fi'
 after_success:
-    - docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
-    - docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
-    - docker tag app $DOCKER_USERNAME/app:latest
-    - docker push $DOCKER_USERNAME/app:latest
+    - 'if [ "$TRAVIS_BRANCH" = "master" ]; then
+    docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER;
+    docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER;
+    docker tag app $DOCKER_USERNAME/app:latest;
+    docker push $DOCKER_USERNAME/app:latest;
+    fi'
