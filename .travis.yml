@@ -3,11 +3,10 @@ node_js:
     - "13"
 services:
     - docker
-env:
-    - ALGO=true
-    - RAMA_MASTER=(TRAVIS_BRANCH = 'master')
-    - CORRER_TESTS_DE_INTEGRACION=(RAMA_MASTER || TRAVIS_PULL_REQUEST = true)
 before_install:
+    - if [[ $TRAVIS_BRANCH == 'master' || $TRAVIS_PULL_REQUEST ]]; then
+          export CORRER_TESTS_DE_INTEGRACION=true
+      fi
     # login to docker registries (dockerhub)
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - git clone https://github.com/FrancoLiberali/behave-test.git
@@ -17,14 +16,13 @@ install:
     - npm install
     - cd behave-test && sudo pip install -r requirements.txt
 before_script:
-    - 'if [ "$CORRER_TESTS_DE_INTEGRACION" = "true" ]; then docker-compose up -d --build; fi' # levantar la aplicacion
+    - if [[ $CORRER_TESTS_DE_INTEGRACION ]]; then docker-compose up -d --build; fi # levantar la aplicacion
 script:
     - npm test # unit tests
-    - echo "$(ALGO)"
     - echo "$(CORRER_TESTS_DE_INTEGRACION)"
-    - 'if [ "$CORRER_TESTS_DE_INTEGRACION" = "true" ]; then behave; fi'  # test de integracion
+    - if [[ $CORRER_TESTS_DE_INTEGRACION ]]; then behave; fi  # test de integracion
 after_script:
-    - 'if [ "$CORRER_TESTS_DE_INTEGRACION" = "true" ]; then docker-compose down; fi'
+    - if [[ $CORRER_TESTS_DE_INTEGRACION ]]; then docker-compose down; fi
 after_success:
     - docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
     - docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
