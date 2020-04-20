@@ -3,6 +3,9 @@ node_js:
     - "13"
 services:
     - docker
+env:
+    - RAMA_MASTER = (TRAVIS_BRANCH = 'master')
+    - CORRER_TESTS_DE_INTEGRACION = (RAMA_MASTER || TRAVIS_PULL_REQUEST = true)
 before_install:
     # login to docker registries (dockerhub)
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
@@ -11,16 +14,15 @@ before_install:
 install:
     # install deps
     - npm install
-    - echo "$(pwd)"
     - cd behave-test && sudo pip install -r requirements.txt
 before_script:
-    - docker-compose up -d --build # levantar la aplicacion
+    - 'if [ "$CORRER_TESTS_DE_INTEGRACION" = "true" ]; then docker-compose up -d --build; fi' # levantar la aplicacion
 script:
     - npm test # unit tests
-    - echo "$(pwd)"
-    - 'if [ "$TRAVIS_BRANCH" =  "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then behave; fi'  # test de integracion
+    - echo "$(CORRER_TESTS_DE_INTEGRACION)"
+    - 'if [ "$CORRER_TESTS_DE_INTEGRACION" = "true" ]; then behave; fi'  # test de integracion
 after_script:
-    - docker-compose down
+    - 'if [ "$CORRER_TESTS_DE_INTEGRACION" = "true" ]; then docker-compose down; fi'
 after_success:
     - docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
     - docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER
