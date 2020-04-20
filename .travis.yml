@@ -3,6 +3,11 @@ node_js:
     - "13"
 services:
     - docker
+notifications:
+    email:
+        if: branch = master
+        recipients:
+            - franco.liberali@gmail.com
 before_install:
     - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then echo "hola"; fi'
     # login to docker registries (dockerhub)
