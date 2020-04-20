@@ -21,9 +21,9 @@ script:
 after_script:
     - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then docker-compose down; fi'
 after_success:
-    - if [ $TRAVIS_BRANCH == "master" ]; then
+    - 'if [ "$TRAVIS_BRANCH" = "master" ]; then
     docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER;
     docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER;
     docker tag app $DOCKER_USERNAME/app:latest;
     docker push $DOCKER_USERNAME/app:latest;
-    fi
+    fi'
