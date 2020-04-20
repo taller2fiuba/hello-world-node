@@ -6,6 +6,8 @@ services:
 before_install:
     - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then export CORRER_TESTS_DE_INTEGRACION=true; fi'
     - echo "$(CORRER_TESTS_DE_INTEGRACION)"
+    - 'if [ "$TRAVIS_BRANCH" != "master" ]; then export NO_ES_MASTER=true; fi'
+    - echo "$(NO_ES_MASTER)"
     # asd
     # login to docker registries (dockerhub)
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
