@@ -18,7 +18,7 @@ before_script:
 script:
     - npm test # unit tests
     - echo "$(pwd)"
-    - behave # test de integracion
+    - 'if [ "$TRAVIS_BRANCH" =  "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then behave; fi'  # test de integracion
 after_script:
     - docker-compose down
 after_success:
