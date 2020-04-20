@@ -4,7 +4,7 @@ node_js:
 services:
     - docker
 before_install:
-    - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; export CORRER_TESTS_DE_INTEGRACION=true; fi'
+    - 'if [ "$TRAVIS_BRANCH" = "master" -o "$TRAVIS_PULL_REQUEST" = "true" ]; then export CORRER_TESTS_DE_INTEGRACION=true; fi'
     - echo "$(CORRER_TESTS_DE_INTEGRACION)"
     # asd
     # login to docker registries (dockerhub)
