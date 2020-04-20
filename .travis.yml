@@ -4,8 +4,8 @@ node_js:
 services:
     - docker
 env:
-    - RAMA_MASTER = (TRAVIS_BRANCH = 'master')
-    - CORRER_TESTS_DE_INTEGRACION = (RAMA_MASTER || TRAVIS_PULL_REQUEST = true)
+    - RAMA_MASTER=(TRAVIS_BRANCH = 'master')
+    - CORRER_TESTS_DE_INTEGRACION=(RAMA_MASTER || TRAVIS_PULL_REQUEST = true)
 before_install:
     # login to docker registries (dockerhub)
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
