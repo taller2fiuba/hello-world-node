@@ -18,7 +18,7 @@ before_script:
 script:
     - npm test # unit tests
     - echo "$(pwd)"
-    - cd behave-test && behave # test de integracion
+    - behave # test de integracion
 after_script:
     - docker-compose down
 after_success:
