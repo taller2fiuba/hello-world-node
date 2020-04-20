@@ -10,7 +10,6 @@ router.use(function (req,res,next) {
   });
 
 router.get('/', function(req,res){
-    // comentario
     res.json({title:'Hello world'});
 });
 
