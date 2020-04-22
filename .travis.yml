@@ -11,8 +11,7 @@ notifications:
 before_install:
     # instalar heroku CLI
     - wget -qO- https://toolbelt.heroku.com/install.sh | sh
-    # login to docker registries (dockerhub)
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    # login to heroku registries
     - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com
     - git clone https://github.com/FrancoLiberali/behave-test.git
     - sudo pip install --upgrade pip
@@ -30,12 +29,6 @@ after_script:
 after_success:
     - 'if [ "$TRAVIS_BRANCH" = "master" ]; then
     cd ..;
-    docker tag app $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER;
-    docker push $DOCKER_USERNAME/app:$TRAVIS_BUILD_NUMBER;
-    docker tag app $DOCKER_USERNAME/app:latest;
-    docker push $DOCKER_USERNAME/app:latest;
-    fi'
-    - 'if [ "$TRAVIS_BRANCH" = "master" ]; then
     docker build -t app .;
     docker tag app registry.heroku.com/$HEROKU_APP_NAME/web;
     fi'
