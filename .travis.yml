@@ -10,6 +10,7 @@ notifications:
             - franco.liberali@gmail.com
             - ejusto@fi.uba.ar
             - meiglesias@fi.uba.ar
+            - lsportelli@fi.uba.ar
 before_install:
     # instalar heroku CLI
     - wget -qO- https://toolbelt.heroku.com/install.sh | sh
