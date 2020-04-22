@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/edjus/node-ci.svg?token=R6a2CVP9WoqzVpSVTay8&branch=master)](https://travis-ci.com/edjus/node-ci)
+[![Build Status](https://travis-ci.com/taller2fiuba/hello-world-node.svg?token=QmhbESCXPe2HTNdVCFP9&branch=master)](https://travis-ci.com/taller2fiuba/hello-world-node)
 
 Test CI nodejs 13 + mocha + chai  
 
