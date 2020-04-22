@@ -31,6 +31,7 @@ after_script:
 after_success:
     - 'if [ "$TRAVIS_BRANCH" = "master" ]; then
     cd ..;
+    npm run coveralls;
     docker build -t app .;
     docker tag app registry.heroku.com/$HEROKU_APP_NAME/web;
     fi'

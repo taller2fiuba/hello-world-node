@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/taller2fiuba/hello-world-node.svg?token=QmhbESCXPe2HTNdVCFP9&branch=master)](https://travis-ci.com/taller2fiuba/hello-world-node)
+[![Coverage Status](https://coveralls.io/repos/github/taller2fiuba/hello-world-node/badge.svg?branch=master)](https://coveralls.io/github/taller2fiuba/hello-world-node?branch=master)
 
 Test CI nodejs 13 + mocha + chai  
 

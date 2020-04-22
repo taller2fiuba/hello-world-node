@@ -15,8 +15,8 @@ router.get("/", function (req, res) {
 
 app.use("/", router);
 
-app.listen(port, function () {
+const server = app.listen(port, function () {
   console.log(`Example app listening on port ${port}!`);
 });
 
-module.exports = app;
+module.exports = server;
