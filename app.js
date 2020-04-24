@@ -10,7 +10,7 @@ router.use(function (req, res, next) {
 });
 
 router.get("/", function (req, res) {
-  res.json({ title: "Hello world" });
+  res.json({ title: "Hello world by NodeJS" });
 });
 
 app.use("/", router);
