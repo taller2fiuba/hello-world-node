@@ -10,7 +10,7 @@ describe("GET /", () => {
   it("should return a json hello world", (done) => {
     request.get("/").end((err, res) => {
       res.should.have.status(200);
-      expect(res.body).to.deep.equal({ title: "Hello world" });
+      expect(res.body).to.deep.equal({ title: "Hello world by NodeJS" });
       done();
     });
   });
