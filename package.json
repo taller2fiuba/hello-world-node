@@ -10,7 +10,8 @@
     "fix-lint": "eslint --fix --ignore-path .gitignore .",
     "test": "istanbul cover _mocha",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "env-cmd -f ./config/dev.env nodemon app,js"
   },
   "keywords": [
     "nodejs",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "coveralls": "^3.0.13",
+    "env-cmd": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.11.0",
