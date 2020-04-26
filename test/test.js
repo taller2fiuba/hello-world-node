@@ -1,6 +1,9 @@
 // Import chai.
 let chai = require("chai"),
   path = require("path");
+const nock = require("nock");
+const homeController = require("../src/controllers/HomeController");
+const MockAdapter = require("axios-mock-adapter");
 
 const expect = chai.expect;
 const should = chai.should();
@@ -37,4 +40,37 @@ describe("Rectangle", () => {
       }).to.throw(Error, '"width" must be a number.');
     });
   });
+});
+
+class MockResponse {
+  constructor() {
+    this.data = {};
+    this.llamado = false;
+  }
+
+  send(data) {
+    this.llamado = true;
+    this.data = data;
+  }
+}
+
+describe("HomeController", function () {
+  beforeEach(() => {
+    response = new MockResponse();
+    let mock = new MockAdapter(homeController.axios);
+    mock.onGet("https://api.github.com/users/francoliberali").reply(200, {
+      name: "John Smith",
+    });
+  });
+
+  it("debe responder hello world cuando llamo al index", function () {
+    homeController.index({}, response);
+    response.data.title.should.equal("Hello world by NodeJS");
+  });
+
+  // it("debe responder el nombre de lo devuelto por github cuando llamo a elmascapodegithub", () => {
+  // homeController.elmascapodegithub({}, response);
+  // response.llamado.should.equal(true);
+  // response.data.should.equal("Franco Liberali");
+  // });
 });
