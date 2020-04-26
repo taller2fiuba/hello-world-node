@@ -11,7 +11,7 @@
     "test": "env-cmd -f ./config/test.env istanbul cover _mocha",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "start": "node app.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon app,js"
+    "dev": "env-cmd -f ./config/dev.env nodemon app.js"
   },
   "keywords": [
     "nodejs",
