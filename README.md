@@ -30,4 +30,4 @@ heroku open
 
 # Para levantar el server con nodemon
 
-`npx nodemon app.js`
+`npm run dev`
