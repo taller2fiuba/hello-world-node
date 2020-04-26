@@ -1,5 +1,6 @@
 const express = require("express");
 require("./src/db/mongoose");
+const home_routers = require("./src/routers/home");
 const user_routers = require("./src/routers/users");
 
 const app = express();
@@ -14,11 +15,7 @@ router.use(function (req, res, next) {
   next();
 });
 
-router.get("/", function (req, res) {
-  res.send({ title: "Hello world by NodeJS" });
-});
-
-app.use("/", router);
+app.use("/", home_routers);
 app.use("/users", user_routers);
 
 const server = app.listen(port, function () {
