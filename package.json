@@ -11,7 +11,8 @@
     "test": "env-cmd -f ./config/test.env istanbul cover _mocha",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
     "start": "node app.js",
-    "dev": "env-cmd -f ./config/dev.env nodemon app.js"
+    "dev": "env-cmd -f ./config/dev.env nodemon app.js",
+    "debug": "mocha --inspect-brk test/test.js"
   },
   "keywords": [
     "nodejs",
@@ -24,7 +25,6 @@
     "mongoose": "^5.9.10"
   },
   "devDependencies": {
-    "axios-mock-adapter": "^1.18.1",
     "chai": "^4.2.0",
     "coveralls": "^3.0.13",
     "env-cmd": "^10.1.0",
@@ -36,7 +36,6 @@
     "istanbul": "^0.4.5",
     "mocha": "^7.1.2",
     "mocha-lcov-reporter": "^1.3.0",
-    "nock": "^12.0.3",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "sinon": "^9.0.2"
