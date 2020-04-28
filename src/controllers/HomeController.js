@@ -1,14 +1,15 @@
-const axios = require("axios");
+/* istanbul ignore file */
+const gitHubApiAdapter = require("../adapters/GitHubApiAdapter");
 
 module.exports = {
   index: (req, res) => {
     res.send({ title: "Hello world by NodeJS" });
   },
-  elmascapodegithub: (req, res) => {
-    axios
-      .get("https://api.github.com/users/francoliberali")
-      .then((response) => res.send({ title: "gato" }))
-      .catch((error) => res.send({ title: "gato2" }));
+  github: (req, res) => {
+    return gitHubApiAdapter
+      .getUsuario(req.query.nombreDeUsuario)
+      .then((nombre) => {
+        res.send({ nombre: nombre });
+      });
   },
-  axios: axios,
 };
