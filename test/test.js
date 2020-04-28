@@ -36,6 +36,7 @@ describe("HomeController", function () {
       .github({ query: { nombreDeUsario: "francoliberali" } }, response)
       .then(() => {
         response.data.nombre.should.equal("Franco Liberali");
+        stub.restore();
       });
   });
 });
