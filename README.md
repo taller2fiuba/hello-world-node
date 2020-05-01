@@ -3,24 +3,31 @@
 
 Test CI nodejs 13 + mocha + chai  
 
-# Para instalar
+# Para iniciar el servidor de desarrollo
 
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -  
-sudo apt-get install -y nodejs  
-npm install  
+```bash
+$ bin/dev-compose up
+```
+El servidor estará aceptando conexiones en http://localhost:27080/
 
-# Para correr la aplicacion local
+# Para detener el servidor de desarrollo
 
-docker-compose up  
-entrar a http://localhost:27080/  
+```bash
+$ bin/dev-compose stop
+```
 
+Para detener el servidor y eliminar los contenedores asociados
+
+```bash
+$ bin/dev-compose down
+```
 # Para correr los tests unitarios
 
-npm test  
+`bin/run-unit-tests`
 
 # Para arreglar automaticamente los errores de lint
 
-npm run fix-lint  
+`bin/npm run fix-lint`
 
 # Para abrir la app de heroku desde la terminal
 
@@ -28,6 +35,11 @@ heroku login
 heroku git:remote -a node-ci-test-taller2  
 heroku open  
 
-# Para levantar el server con nodemon
+# Para instalar
 
-`npm run dev`
+```bash
+curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -  
+sudo apt-get install -y nodejs  
+npm install  
+```
+
