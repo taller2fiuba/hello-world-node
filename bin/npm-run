@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec $(dirname "$0")/dev-compose exec hello_node npm run "$@"
