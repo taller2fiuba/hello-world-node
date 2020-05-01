@@ -1,11 +1,17 @@
-/* istanbul ignore file */
 const gitHubApiAdapter = require("../adapters/GitHubApiAdapter");
+const logger = require("../../logger").logger;
 
 module.exports = {
   index: (req, res) => {
-    req.log.warn("ejemplo de logeo en controller, que logea todo el request");
-    res.send({ title: "Hello world by NodeJS" });
-    res.log.warn("ejemplo de logeo en controller, que logea todo el response");
+    logger.info(
+      req,
+      "ejemplo de logeo en controller, que logea todo el request"
+    );
+    res.status(200).send({ title: "Hello world by NodeJS" });
+    var algo = logger.info(
+      res,
+      "ejemplo de logeo en controller, que logea todo el response"
+    );
   },
   github: (req, res) => {
     return gitHubApiAdapter
