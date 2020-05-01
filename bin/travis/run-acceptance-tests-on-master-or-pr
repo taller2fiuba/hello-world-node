@@ -3,7 +3,7 @@
 # Este script va a asumir que las siguientes condiciones se cumplen
 # - El servidor de desarrollo de Node está corriendo en http://localhost:27080/
 
-# Este script va a 
+# Este script va a
 # - Clonar los repositorios hello-world-flask y hello-world-acceptance-tests
 # - Actualizar pip e instalar las dependencias para hello-world-acceptance-tests
 # - Iniciar el servidor de desarrollo de Flask
@@ -39,12 +39,12 @@ $GIT clone "$HELLO_WORLD_ACCEPTANCE_TESTS_REPO"
 $PIP install --upgrade pip
 $PIP install -r hello-world-acceptance-tests/requirements.txt
 
-./hello-world-flask/bin/dev-compose up
+./hello-world-flask/bin/dev-compose up -d
 
-until curl -o /dev/null -s --connect-timeout 1 $DEV_SERVER_URL; 
-do 
-    echo "Esperando $RETRY_TIME seg(s) para que el server se inicie"; 
-    sleep $RETRY_TIME; 
+until curl -o /dev/null -s --connect-timeout 1 $DEV_SERVER_URL;
+do
+    echo "Esperando $RETRY_TIME seg(s) para que el server se inicie";
+    sleep $RETRY_TIME;
 done;
 
 echo "Servidor de desarrollo iniciado en $DEV_SERVER_URL"
