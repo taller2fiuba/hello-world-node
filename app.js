@@ -4,6 +4,7 @@ const home_routers = require("./src/routers/home");
 const user_routers = require("./src/routers/users");
 const logger = require("./logger").logger;
 const loggerHttp = require("./logger").loggerHttp;
+const APP_VERSION = require("./version");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/users", user_routers);
 
 const server = app.listen(port, function () {
   logger.info(`Example app listening on port ${port}!`);
+  logger.info(`Iniciando version de la app: ${APP_VERSION}`);
   logger.debug("debug de ejemplo");
   logger.warn("warn de ejemplo");
   try {
