@@ -9,7 +9,7 @@ services:
             MONGODB_URL: "mongodb://db:27017/hello-node-dev"
             PORT: 8080
         ports:
-           - 27080:8080
+           - ${HELLO_NODE_PORT:-27080}:8080
     db:
         image: mongo
         restart: always

@@ -13,6 +13,10 @@ class MockResponse {
     this.data = {};
   }
 
+  status(status) {
+    this.status = status;
+    return this;
+  }
   send(data) {
     this.data = data;
   }
@@ -25,6 +29,7 @@ describe("HomeController", function () {
 
   it("debe responder hello world cuando llamo al index", function () {
     homeController.index({}, response);
+    response.status.should.equal(200);
     response.data.title.should.equal("Hello world by NodeJS");
   });
 

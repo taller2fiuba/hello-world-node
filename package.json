@@ -10,8 +10,8 @@
     "fix-lint": "eslint --fix --ignore-path .gitignore .",
     "test": "istanbul cover _mocha",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "start": "node app.js",
-    "dev": "nodemon app.js 0.0.0.0:8080",
+    "start": "node app.js | pino-pretty -c -l",
+    "dev": "nodemon app.js 0.0.0.0:8080 | pino-pretty -c -l",
     "debug": "mocha --inspect-brk test/test.js"
   },
   "keywords": [
@@ -22,7 +22,10 @@
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.16.4",
-    "mongoose": "^5.9.10"
+    "mongoose": "^5.9.10",
+    "pino": "^6.2.1",
+    "pino-http": "^5.1.0",
+    "pino-pretty": "^4.0.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",

@@ -34,12 +34,3 @@ $ bin/dev-compose down
 heroku login  
 heroku git:remote -a node-ci-test-taller2  
 heroku open  
-
-# Para instalar
-
-```bash
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -  
-sudo apt-get install -y nodejs  
-npm install  
-```
-
