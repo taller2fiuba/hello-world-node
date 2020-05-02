@@ -10,7 +10,7 @@
     "fix-lint": "eslint --fix --ignore-path .gitignore .",
     "test": "istanbul cover _mocha",
     "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-    "start": "node app.js | pino-pretty -c -l",
+    "start": "node app.js | pino-pretty -l",
     "dev": "nodemon app.js 0.0.0.0:8080 | pino-pretty -c -l",
     "debug": "mocha --inspect-brk test/test.js"
   },
